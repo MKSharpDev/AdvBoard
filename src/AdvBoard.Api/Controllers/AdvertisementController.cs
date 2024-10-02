@@ -1,5 +1,9 @@
 ﻿using AdvBoard.AppServices.Contexts.Advertisement.Service;
+using AdvBoard.Contracts.Advertisement;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Reflection;
+using System.Threading;
 
 namespace AdvBoard.Api.Controllers
 {
@@ -27,7 +31,33 @@ namespace AdvBoard.Api.Controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            return Ok(await _advertisemenService.GetByIdAsync(id, cancellationToken));
+            var result = await _advertisemenService.GetByIdAsync(id, cancellationToken);
+            return StatusCode((int)HttpStatusCode.OK, result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] AdvertRequest model, CancellationToken cancellationToken)
+        {
+            await _advertisemenService.CreateAsync(model, cancellationToken);
+            return StatusCode((int)HttpStatusCode.Created);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditAsync([FromBody] AdverWithIdRequest model, CancellationToken cancellationToken)
+        {
+            var result = await _advertisemenService.UpdatedAsync(model,cancellationToken);
+
+            //Подумать какой статус код надо веррнуть
+            return StatusCode((int)HttpStatusCode.OK, result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAsync(Guid id, CancellationToken cancellationToken)
+        {
+            await _advertisemenService.DeletedAsync(id, cancellationToken);
+
+            //Подумать какой статус код надо веррнуть
+            return StatusCode((int)HttpStatusCode.OK);
         }
     }
 }

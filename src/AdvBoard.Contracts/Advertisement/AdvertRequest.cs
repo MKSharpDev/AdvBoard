@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace AdvBoard.Contracts.Advertisement
 {
-    public class AdvertResponse
+    public class AdvertRequest
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
-        public OrderStatus ordesStatus { get; set; }
-        public DateTime Created { get; set; }
+        public decimal? Price { get; set; }
         public Guid? CategoryId { get; set; }
     }
 }
