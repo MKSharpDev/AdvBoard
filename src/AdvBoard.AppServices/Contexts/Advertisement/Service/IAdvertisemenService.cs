@@ -10,7 +10,7 @@ namespace AdvBoard.AppServices.Contexts.Advertisement.Service
     public interface IAdvertisemenService
     {
         Task<ICollection<AdvertResponse>> GetByIdAsync(Guid id, CancellationToken cancellationToken);
-        Task CreateAsync(AdvertRequest request, CancellationToken cancellationToken);
+        Task<Guid> CreateAsync(AdvertRequest request, CancellationToken cancellationToken);
         Task DeletedAsync(Guid id, CancellationToken cancellationToken);
 
         /// <summary>

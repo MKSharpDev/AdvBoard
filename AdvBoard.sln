@@ -25,14 +25,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.Domain", "src\AdvB
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.DataAccess", "src\AdvBoard.DataAccess\AdvBoard.DataAccess.csproj", "{DCE32A5F-91AE-4D83-8031-F731FAC33F14}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4AB73D8A-5961-4CAB-B556-95DEC071D7F2} = {4AB73D8A-5961-4CAB-B556-95DEC071D7F2}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.Infrastructure", "src\AdvBoard.Infrastructure\AdvBoard.Infrastructure.csproj", "{A396105E-28D1-473A-A4DC-4D6945E1C641}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4AB73D8A-5961-4CAB-B556-95DEC071D7F2} = {4AB73D8A-5961-4CAB-B556-95DEC071D7F2}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.Api", "src\AdvBoard.Api\AdvBoard.Api.csproj", "{047C3293-6D24-4B89-B9CE-578E82520113}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.ComponentRegistrator", "src\AdvBoard.ComponentRegistrator\AdvBoard.ComponentRegistrator.csproj", "{B1647941-3FCF-435F-8890-0E42C4316197}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F1B6C4F-8510-4890-BF13-7CA2CB1FE738} = {9F1B6C4F-8510-4890-BF13-7CA2CB1FE738}
+		{DCE32A5F-91AE-4D83-8031-F731FAC33F14} = {DCE32A5F-91AE-4D83-8031-F731FAC33F14}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvBoard.DbMigrators", "src\AdvBoard.DbMigrators\AdvBoard.DbMigrators.csproj", "{DD6AB78F-60FB-412C-AC0B-2144E6EF08C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.DbMigrators", "src\AdvBoard.DbMigrators\AdvBoard.DbMigrators.csproj", "{DD6AB78F-60FB-412C-AC0B-2144E6EF08C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvBoard.MapProfile", "AdvBoard.MapProfile\AdvBoard.MapProfile.csproj", "{F0472366-5234-46EC-9040-435A46DBA618}"
+	ProjectSection(ProjectDependencies) = postProject
+		{557EDFB8-C92B-4DBB-8042-24646C704679} = {557EDFB8-C92B-4DBB-8042-24646C704679}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +87,10 @@ Global
 		{DD6AB78F-60FB-412C-AC0B-2144E6EF08C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD6AB78F-60FB-412C-AC0B-2144E6EF08C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD6AB78F-60FB-412C-AC0B-2144E6EF08C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0472366-5234-46EC-9040-435A46DBA618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0472366-5234-46EC-9040-435A46DBA618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0472366-5234-46EC-9040-435A46DBA618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0472366-5234-46EC-9040-435A46DBA618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +109,7 @@ Global
 		{047C3293-6D24-4B89-B9CE-578E82520113} = {47C6DBCB-ABED-42F6-BFA2-E7D086D8DB4D}
 		{B1647941-3FCF-435F-8890-0E42C4316197} = {61D3AEB3-7BEC-4EE3-A0FD-EAAD29E0199A}
 		{DD6AB78F-60FB-412C-AC0B-2144E6EF08C6} = {47C6DBCB-ABED-42F6-BFA2-E7D086D8DB4D}
+		{F0472366-5234-46EC-9040-435A46DBA618} = {61D3AEB3-7BEC-4EE3-A0FD-EAAD29E0199A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED2BBEE6-B186-49A6-8777-D9BCD78E817B}

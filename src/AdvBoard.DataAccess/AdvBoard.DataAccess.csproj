@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AdvBoard.Domain\AdvBoard.Domain.csproj" />
+	  <ProjectReference Include="..\AdvBoard.AppServices\AdvBoard.AppServices.csproj" />
+	  <ProjectReference Include="..\AdvBoard.Domain\AdvBoard.Domain.csproj" />
+	  <ProjectReference Include="..\AdvBoard.Infrastructure\AdvBoard.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
