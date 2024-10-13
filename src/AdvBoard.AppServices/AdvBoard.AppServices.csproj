@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contexts\Advertisement\Repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AdvBoard.Contracts\AdvBoard.Contracts.csproj" />
   </ItemGroup>
 
