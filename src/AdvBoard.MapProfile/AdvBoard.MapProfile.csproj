@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\AdvBoard.Domain\AdvBoard.Domain.csproj" />
+    <ProjectReference Include="..\AdvBoard.Contracts\AdvBoard.Contracts.csproj" />
+    <ProjectReference Include="..\AdvBoard.Domain\AdvBoard.Domain.csproj" />
   </ItemGroup>
 
 </Project>
