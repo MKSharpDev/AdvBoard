@@ -9,6 +9,6 @@ namespace AdvBoard.AppServices.Helpers
 {
     public interface IJwtProvider
     {
-        string GenerateToken(AuthDto user);
+        string GenerateToken(UserDto user);
     }
 }

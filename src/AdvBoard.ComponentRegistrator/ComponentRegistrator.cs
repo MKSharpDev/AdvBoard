@@ -8,6 +8,8 @@ using AdvBoard.MapProfile;
 using AdvBoard.AppServices.Contexts.Category.Service;
 using AdvBoard.AppServices.Contexts.Category.Repository;
 using AdvBoard.AppServices.Helpers;
+using AdvBoard.AppServices.Authorization.Repository;
+using AdvBoard.AppServices.Authorization.Service;
 
 namespace AdvBoard.ComponentRegistrator
 {
@@ -19,15 +21,17 @@ namespace AdvBoard.ComponentRegistrator
 
             services.AddScoped<IAdvertisemenService, AdvertisemenService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IUserService, UserService>();
+
 
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped<IAdvertisemenRepository, AdvertisementRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
 
             services.AddScoped<IJwtProvider, JwtProvider>();
-
-            
-
+         
             return services;
         }
 
@@ -37,7 +41,9 @@ namespace AdvBoard.ComponentRegistrator
             {              
                 cfg.AddProfile<AdvertProfile>();
                 cfg.AddProfile<CategoryProfile>();
+                cfg.AddProfile<UserProfile>();
             });
+
             configuration.AssertConfigurationIsValid();
             return configuration;
         }

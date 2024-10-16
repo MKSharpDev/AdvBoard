@@ -30,7 +30,8 @@ namespace AdvBoard.Api.Controllers
         /// <param name="id">Идентификатор.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Модель объявления.</returns>
-        [Authorize]
+         
+        [AllowAnonymous]
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
@@ -38,6 +39,7 @@ namespace AdvBoard.Api.Controllers
             return StatusCode((int)HttpStatusCode.OK, result);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] AdvertRequest model, CancellationToken cancellationToken)
         {
@@ -45,6 +47,7 @@ namespace AdvBoard.Api.Controllers
             return StatusCode((int)HttpStatusCode.Created);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> EditAsync([FromBody] AdverWithIdRequest model, CancellationToken cancellationToken)
         {
@@ -54,6 +57,7 @@ namespace AdvBoard.Api.Controllers
             return StatusCode((int)HttpStatusCode.OK, result);
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id, CancellationToken cancellationToken)
         {

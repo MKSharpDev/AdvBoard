@@ -2,6 +2,7 @@
 using AdvBoard.AppServices.Contexts.Category.Service;
 using AdvBoard.Contracts.Advertisement;
 using AdvBoard.Contracts.Category;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -13,6 +14,7 @@ namespace AdvBoard.Api.Controllers
     /// </summary>
     [Route("api/categories")]
     [ApiController]
+    [AllowAnonymous]
     public class CategoryController : Controller
     {
 
