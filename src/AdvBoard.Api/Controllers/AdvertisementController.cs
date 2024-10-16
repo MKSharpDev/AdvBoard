@@ -1,6 +1,8 @@
 ﻿using AdvBoard.AppServices.Contexts.Advertisement.Service;
 using AdvBoard.Contracts.Advertisement;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using System.Net;
 using System.Reflection;
 using System.Threading;
@@ -28,6 +30,7 @@ namespace AdvBoard.Api.Controllers
         /// <param name="id">Идентификатор.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Модель объявления.</returns>
+        [Authorize]
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {

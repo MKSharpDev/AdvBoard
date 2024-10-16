@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace AdvBoard.Api
 {
@@ -25,28 +26,6 @@ namespace AdvBoard.Api
 
             builder.Services.AddApplicationServices();
 
-            //builder.Services
-            //    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie(options =>
-            //    {
-            //        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-            //        options.SlidingExpiration = true;
-            //        options.Events.OnSignedIn = context =>
-            //        {
-            //            return Task.CompletedTask;
-            //        };
-            //        options.Events.OnRedirectToAccessDenied = context =>
-            //        {
-            //            context.Response.StatusCode = 403;
-            //            return Task.CompletedTask;
-            //        };
-            //        options.Events.OnRedirectToLogin = context =>
-            //        {
-            //            context.Response.StatusCode = 401;
-            //            return Task.CompletedTask;
-            //        };
-            //        //options.SessionStore = new CustomTicketStore();
-            //    });
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -55,19 +34,40 @@ namespace AdvBoard.Api
                     {
                         ValidateIssuer = false,
                         ValidateAudience = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("500f8598-2273-482b-a99f-77c9de5a321c"))
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes("500f8598-2273-482b-a99f-77c9de5a321c"))
                     };
 
-                    //options.Events = new JwtBearerEvents() 
-                    //{ 
-                    //    OnMessageReceived = 
-                    //};
-                    //"inn-cookies"
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = contex =>
+                        {
+                            contex.Token = contex.Request.Cookies["inn-cookies"];
+
+                            return Task.CompletedTask;
+                        }
+                    };
+
                 }
                 );
             builder.Services.AddAuthorization();
+            //builder.Services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("RequireAdministratorRole",
+            //         policy => policy.RequireRole("String"));
+            //});
 
-           var app = builder.Build();
+            //builder.Services.AddAuthorization(op =>
+            //{
+            //    op.AddPolicy("Something",
+            //        policy => policy.RequireAuthenticatedUser());
+
+
+            //});
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -78,8 +78,8 @@ namespace AdvBoard.Api
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
