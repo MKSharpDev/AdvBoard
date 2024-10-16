@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvBoard.Contracts.Advertisement
+namespace AdvBoard.Contracts.Category
 {
-    public class AdverWithIdRequest: AdvertRequest
+    public class CategoryWithIdRequest : CategoryRequest
     {
         public Guid Id { get; set; }
     }

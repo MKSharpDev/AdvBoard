@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using AdvBoard.DataAccess.Repository;
 using AdvBoard.Infrastructure.Repository;
 using AdvBoard.MapProfile;
+using AdvBoard.AppServices.Contexts.Category.Service;
+using AdvBoard.AppServices.Contexts.Category.Repository;
+using AdvBoard.AppServices.Helpers;
 
 namespace AdvBoard.ComponentRegistrator
 {
@@ -15,11 +18,15 @@ namespace AdvBoard.ComponentRegistrator
             services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
 
             services.AddScoped<IAdvertisemenService, AdvertisemenService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped<IAdvertisemenRepository, AdvertisementRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+            services.AddScoped<IJwtProvider, JwtProvider>();
 
+            
 
             return services;
         }
@@ -28,7 +35,8 @@ namespace AdvBoard.ComponentRegistrator
         {
             var configuration = new MapperConfiguration(cfg =>
             {              
-                cfg.AddProfile<AdvertProfile>();         
+                cfg.AddProfile<AdvertProfile>();
+                cfg.AddProfile<CategoryProfile>();
             });
             configuration.AssertConfigurationIsValid();
             return configuration;

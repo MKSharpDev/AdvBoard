@@ -14,11 +14,11 @@ namespace AdvBoard.MapProfile
         public AdvertProfile()
         {
             CreateMap<AdvertRequest, AdvertisementDto>(MemberList.None);
+            CreateMap<AdverWithIdRequest, AdvertisementDto>(MemberList.None);
 
             CreateMap<AdvertisementDto, AdvertResponse>(MemberList.None);
 
             CreateMap<Advertisement, AdvertisementDto>(MemberList.None).ReverseMap(); ;
-
         }
     }
 }
