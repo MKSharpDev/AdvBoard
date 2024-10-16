@@ -44,9 +44,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.ComponentRegistrat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.DbMigrators", "src\AdvBoard.DbMigrators\AdvBoard.DbMigrators.csproj", "{DD6AB78F-60FB-412C-AC0B-2144E6EF08C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvBoard.MapProfile", "AdvBoard.MapProfile\AdvBoard.MapProfile.csproj", "{F0472366-5234-46EC-9040-435A46DBA618}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvBoard.MapProfile", "src\AdvBoard.MapProfile\AdvBoard.MapProfile.csproj", "{F0472366-5234-46EC-9040-435A46DBA618}"
 	ProjectSection(ProjectDependencies) = postProject
 		{557EDFB8-C92B-4DBB-8042-24646C704679} = {557EDFB8-C92B-4DBB-8042-24646C704679}
+		{9F1B6C4F-8510-4890-BF13-7CA2CB1FE738} = {9F1B6C4F-8510-4890-BF13-7CA2CB1FE738}
 	EndProjectSection
 EndProject
 Global
