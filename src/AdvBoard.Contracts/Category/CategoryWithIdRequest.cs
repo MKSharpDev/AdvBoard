@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvBoard.AppServices.BaseService
+namespace AdvBoard.Contracts.Category
 {
-    public class IBaseService
+    public class CategoryWithIdRequest : CategoryRequest
     {
-
+        public Guid Id { get; set; }
     }
 }

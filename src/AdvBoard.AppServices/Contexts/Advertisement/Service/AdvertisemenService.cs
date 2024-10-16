@@ -1,4 +1,6 @@
-﻿using AdvBoard.Contracts.Advertisement;
+﻿using AdvBoard.AppServices.Contexts.Advertisement.Repository;
+using AdvBoard.Contracts.Advertisement;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +11,43 @@ namespace AdvBoard.AppServices.Contexts.Advertisement.Service
 {
     public class AdvertisemenService : IAdvertisemenService
     {
-        public AdvertisemenService() { }
+        private readonly IMapper _mapper;
+        private readonly IAdvertisemenRepository _advertRepository;
 
-        public Task CreateAsync(AdvertRequest request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+        public AdvertisemenService(
+             IAdvertisemenRepository advertRepository,
+             IMapper mapper
+            ) 
+        { 
+            _advertRepository = advertRepository;
+            _mapper = mapper;
         }
 
-        public Task DeletedAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<Guid> CreateAsync(AdvertRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var advertDto = _mapper.Map<AdvertisementDto>(request);
+            var id = await _advertRepository.CreateAsync(advertDto, cancellationToken);
+            return id;
+
         }
 
-        public Task<ICollection<AdvertResponse>> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        public async Task DeletedAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           await _advertRepository.DeleteAsync(id, cancellationToken);
         }
 
-        public Task<ICollection<AdvertResponse>> UpdatedAsync(AdverWithIdRequest request, CancellationToken cancellationToken)
+        public async Task<AdvertResponse> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var advert = await _advertRepository.GetByIdAsync(id, cancellationToken);
+            return _mapper.Map<AdvertResponse>(advert);
+        }
+
+        public async Task<AdvertResponse> UpdatedAsync(AdverWithIdRequest request, CancellationToken cancellationToken)
+        {
+            var advertDto = _mapper.Map<AdvertisementDto>(request);
+
+            var advert = await _advertRepository.UpdateAsync(advertDto, cancellationToken);
+            return _mapper.Map<AdvertResponse>(advert);
         }
     }
 }

@@ -20,6 +20,9 @@ namespace AdvBoard.DataAccess
 
             modelBuilder.ApplyConfiguration(new AdvConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+            
         }
     }
 }

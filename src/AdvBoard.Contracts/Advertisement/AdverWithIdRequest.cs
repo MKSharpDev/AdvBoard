@@ -8,6 +8,6 @@ namespace AdvBoard.Contracts.Advertisement
 {
     public class AdverWithIdRequest: AdvertRequest
     {
-        Guid id;
+        public Guid Id { get; set; }
     }
 }
