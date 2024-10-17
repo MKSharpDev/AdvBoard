@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdvBoard.DataAccess.Repository
 {
@@ -38,6 +39,12 @@ namespace AdvBoard.DataAccess.Repository
         public async Task DeleteAsync(Guid Id, CancellationToken cancellationToken)
         {
             await _repository.DeleteAsync(Id, cancellationToken);
+        }
+
+        public async Task<ICollection<AdvertisementDto>> GetByCategoryIdAsync(Guid Id, CancellationToken cancellationToken)
+        {
+            var result = await _repository.GetByPredicate(x => x.CategoryId == Id).ToListAsync(cancellationToken);
+            return _mapper.Map<ICollection<AdvertisementDto>>(result);
         }
 
         public async Task<AdvertisementDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken)
