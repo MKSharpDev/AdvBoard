@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using AdvBoard.Domain;
+using AdvBoard.Contracts.Advertisement.Specifications;
 
 namespace AdvBoard.Api.Controllers
 {
@@ -46,6 +47,15 @@ namespace AdvBoard.Api.Controllers
         public async Task<IActionResult> GetByCategoryIdAsync([FromRoute] Guid categoryId, CancellationToken cancellationToken)
         {
             var result = await _advertisemenService.GetByCategoryIdAsync(categoryId, cancellationToken);
+            return StatusCode((int)HttpStatusCode.OK, result);
+        }
+
+        [AllowAnonymous]      
+        [HttpPost]
+        [Route("filters")]
+        public async Task<IActionResult> GetByFilterdAsync([FromBody] SearchAdvertRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _advertisemenService.SearchAdvertsAsync(request, cancellationToken);
             return StatusCode((int)HttpStatusCode.OK, result);
         }
 

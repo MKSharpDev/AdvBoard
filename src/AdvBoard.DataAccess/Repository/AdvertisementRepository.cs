@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using System.Collections.ObjectModel;
+using AdvBoard.Contracts.Advertisement.Specifications;
 
 namespace AdvBoard.DataAccess.Repository
 {
@@ -64,6 +67,41 @@ namespace AdvBoard.DataAccess.Repository
             var advertResult = await _repository.GetByIdAsync(tDto.Id, cancellationToken);
 
             return _mapper.Map<AdvertisementDto>(advertResult);
+        }
+
+
+        public async Task<ICollection<AdvertisementDto>> SearchAdvertsAsync (SearchAdvertRequest request, CancellationToken cancellationToken)
+        {
+
+            string searchString = request.Search;
+
+            //ищем попадание строки
+            Expression<Func<Advertisement, bool>> predicate =
+                 adv => adv.Name.ToLower().Contains(searchString.ToLower()) ||
+                    adv.Description.ToLower().Contains(searchString.ToLower());
+
+            var result = _repository.GetByPredicate(predicate);
+
+            //если есть условие по макс цене
+            if (request.MaxPrice.HasValue)
+            {
+                var maxPrice = request.MaxPrice.Value;
+
+                //в нашем квери делаем выборку
+                result = result.Where(adv => adv.Price <= maxPrice);
+            }
+
+            //если есть условие по мин цене
+            if (request.MinPrice.HasValue)
+            {
+                var minPrice = request.MinPrice.Value;
+                result = result.Where(adv => adv.Price >= minPrice);
+            }
+
+            //тут формируентся запрос к бд
+            await result.ToListAsync(cancellationToken);
+
+            return _mapper.Map<ICollection<AdvertisementDto>>(result);
         }
     }
 }
