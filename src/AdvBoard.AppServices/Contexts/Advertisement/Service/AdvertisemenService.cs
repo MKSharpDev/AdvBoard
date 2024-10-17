@@ -36,6 +36,13 @@ namespace AdvBoard.AppServices.Contexts.Advertisement.Service
            await _advertRepository.DeleteAsync(id, cancellationToken);
         }
 
+        public async Task<ICollection<AdvertResponse>> GetByCategoryIdAsync(Guid Id, CancellationToken cancellationToken)
+        {
+            var resultList = await _advertRepository.GetByCategoryIdAsync(Id, cancellationToken);
+
+            return _mapper.Map<ICollection<AdvertResponse>>(resultList);
+        }
+
         public async Task<AdvertResponse> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var advert = await _advertRepository.GetByIdAsync(id, cancellationToken);

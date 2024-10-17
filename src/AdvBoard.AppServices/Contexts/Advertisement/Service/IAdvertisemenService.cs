@@ -17,5 +17,8 @@ namespace AdvBoard.AppServices.Contexts.Advertisement.Service
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<AdvertResponse> UpdatedAsync(AdverWithIdRequest request, CancellationToken cancellationToken);
+
+        Task<ICollection<AdvertResponse>> GetByCategoryIdAsync(Guid Id, CancellationToken cancellationToken);
+
     }
 }

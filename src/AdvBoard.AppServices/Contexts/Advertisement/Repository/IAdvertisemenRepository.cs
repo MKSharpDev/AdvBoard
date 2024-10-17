@@ -10,5 +10,6 @@ namespace AdvBoard.AppServices.Contexts.Advertisement.Repository
 {
     public interface IAdvertisemenRepository: IRepository<AdvertisementDto>
     {
+        Task<ICollection<AdvertisementDto>> GetByCategoryIdAsync(Guid Id, CancellationToken cancellationToken);
     }
 }

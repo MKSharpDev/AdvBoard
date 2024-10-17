@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Net;
 using System.Reflection;
 using System.Threading;
+using AdvBoard.Domain;
 
 namespace AdvBoard.Api.Controllers
 {
@@ -30,12 +31,21 @@ namespace AdvBoard.Api.Controllers
         /// <param name="id">Идентификатор.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Модель объявления.</returns>
-         
+
         [AllowAnonymous]
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var result = await _advertisemenService.GetByIdAsync(id, cancellationToken);
+            return StatusCode((int)HttpStatusCode.OK, result);
+        }
+
+        [AllowAnonymous]
+        [Route("categories/{categoryId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetByCategoryIdAsync([FromRoute] Guid categoryId, CancellationToken cancellationToken)
+        {
+            var result = await _advertisemenService.GetByCategoryIdAsync(categoryId, cancellationToken);
             return StatusCode((int)HttpStatusCode.OK, result);
         }
 
