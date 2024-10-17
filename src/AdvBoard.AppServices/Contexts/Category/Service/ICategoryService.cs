@@ -12,10 +12,9 @@ namespace AdvBoard.AppServices.Contexts.Category.Service
         Task<CategoryResponse> GetByIdAsync(Guid id, CancellationToken cancellationToken);
         Task<Guid> CreateAsync(CategoryRequest request, CancellationToken cancellationToken);
         Task DeletedAsync(Guid id, CancellationToken cancellationToken);
-
-        /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<CategoryResponse> UpdatedAsync(CategoryWithIdRequest request, CancellationToken cancellationToken);
+        Task<ICollection<CategoryResponse>> GetAllAsync(CancellationToken cancellationToken);
+        Task<bool> IsExistsAsync(Guid id, CancellationToken cancellationToken);
+
     }
 }

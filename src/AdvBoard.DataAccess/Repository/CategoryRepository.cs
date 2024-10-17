@@ -5,6 +5,7 @@ using AdvBoard.Contracts.Category;
 using AdvBoard.Domain;
 using AdvBoard.Infrastructure.Repository;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,18 @@ namespace AdvBoard.DataAccess.Repository
             var сategoryResult = await _repository.GetByIdAsync(tDto.Id, cancellationToken);
 
             return _mapper.Map<CategoryDto>(сategoryResult);
+        }
+
+        public async Task<bool> IsExistsAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await _repository.GetAll().AnyAsync(s => s.Id == id, cancellationToken);
+        }
+
+        public async Task<ICollection<CategoryDto>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var categories = await _repository.GetAll().ToListAsync(cancellationToken);
+
+            return _mapper.Map<ICollection<CategoryDto>>(categories);
         }
     }
 }

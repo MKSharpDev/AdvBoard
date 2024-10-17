@@ -19,10 +19,12 @@ namespace AdvBoard.Api
             // Add services to the container.
             builder.Services.AddDbContext<AdvDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
 
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddFluentValidation();
 
             builder.Services.AddApplicationServices();
 
@@ -53,19 +55,7 @@ namespace AdvBoard.Api
                 }
                 );
             builder.Services.AddAuthorization();
-            //builder.Services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("RequireAdministratorRole",
-            //         policy => policy.RequireRole("String"));
-            //});
 
-            //builder.Services.AddAuthorization(op =>
-            //{
-            //    op.AddPolicy("Something",
-            //        policy => policy.RequireAuthenticatedUser());
-
-
-            //});
 
             var app = builder.Build();
 

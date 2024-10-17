@@ -38,6 +38,13 @@ namespace AdvBoard.Api.Controllers
             return StatusCode((int)HttpStatusCode.OK, result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var result = await _categoryService.GetAllAsync(cancellationToken);
+            return StatusCode((int)HttpStatusCode.OK, result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] CategoryRequest model, CancellationToken cancellationToken)
         {

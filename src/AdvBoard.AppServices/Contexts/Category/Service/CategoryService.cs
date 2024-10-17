@@ -36,10 +36,22 @@ namespace AdvBoard.AppServices.Contexts.Category.Service
             await _categoryRepository.DeleteAsync(id, cancellationToken);
         }
 
+        public async Task<ICollection<CategoryResponse>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var categories = await _categoryRepository.GetAllAsync(cancellationToken);
+
+            return _mapper.Map<ICollection<CategoryResponse>>(categories);
+        }
+
         public async Task<CategoryResponse> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var category = await _categoryRepository.GetByIdAsync(id, cancellationToken);
             return _mapper.Map<CategoryResponse>(category);
+        }
+
+        public async Task<bool> IsExistsAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await _categoryRepository.IsExistsAsync(id,cancellationToken);
         }
 
 

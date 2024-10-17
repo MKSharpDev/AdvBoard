@@ -10,5 +10,7 @@ namespace AdvBoard.AppServices.Contexts.Category.Repository
 {
     public interface ICategoryRepository : IRepository<CategoryDto>
     {
+        Task<bool> IsExistsAsync(Guid id, CancellationToken cancellationToken);
+        Task<ICollection<CategoryDto>> GetAllAsync(CancellationToken cancellationToken);
     }
 }

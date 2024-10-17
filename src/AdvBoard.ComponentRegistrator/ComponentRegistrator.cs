@@ -10,6 +10,11 @@ using AdvBoard.AppServices.Contexts.Category.Repository;
 using AdvBoard.AppServices.Helpers;
 using AdvBoard.AppServices.Authorization.Repository;
 using AdvBoard.AppServices.Authorization.Service;
+using AdvBoard.AppServices.Contexts.Advertisement.Validator;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
+
 
 namespace AdvBoard.ComponentRegistrator
 {
@@ -32,6 +37,19 @@ namespace AdvBoard.ComponentRegistrator
 
             services.AddScoped<IJwtProvider, JwtProvider>();
          
+            return services;
+        }
+
+
+
+        /// <summary>
+        /// Подключить пакеты для работы с FluentValidation.
+        /// </summary>
+        public static IServiceCollection AddFluentValidation(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<CreateAdvertValidator>();
+            services.AddFluentValidationAutoValidation();
+
             return services;
         }
 
