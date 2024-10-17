@@ -1,9 +1,11 @@
 ﻿using AdvBoard.AppServices.Contexts.Advertisement.Repository;
 using AdvBoard.Contracts.Advertisement;
+using AdvBoard.Contracts.Advertisement.Specifications;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,6 +57,14 @@ namespace AdvBoard.AppServices.Contexts.Advertisement.Service
 
             var advert = await _advertRepository.UpdateAsync(advertDto, cancellationToken);
             return _mapper.Map<AdvertResponse>(advert);
+        }
+
+        public async Task<ICollection<AdvertResponse>> SearchAdvertsAsync(SearchAdvertRequest request, CancellationToken cancellationToken)
+        {
+
+            var result =  await _advertRepository.SearchAdvertsAsync(request, cancellationToken);
+
+            return _mapper.Map<ICollection<AdvertResponse>>(result); ;
         }
     }
 }
